@@ -1,0 +1,794 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "dd319fbb-53c4-4463-bdab-798460297211",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "memberships": {
+      "name": "memberships",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "organizationId": {
+          "name": "organizationId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "workspaceId": {
+          "name": "workspaceId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "roleId": {
+          "name": "roleId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "enum('ACTIVE','INVITED','SUSPENDED','REMOVED')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'INVITED'"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
+        },
+        "removedAt": {
+          "name": "removedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "memberships_user_organization_workspace_unique": {
+          "name": "memberships_user_organization_workspace_unique",
+          "columns": [
+            "userId",
+            "organizationId",
+            "workspaceId"
+          ],
+          "isUnique": true
+        },
+        "memberships_user_idx": {
+          "name": "memberships_user_idx",
+          "columns": [
+            "userId"
+          ],
+          "isUnique": false
+        },
+        "memberships_organization_idx": {
+          "name": "memberships_organization_idx",
+          "columns": [
+            "organizationId"
+          ],
+          "isUnique": false
+        },
+        "memberships_workspace_idx": {
+          "name": "memberships_workspace_idx",
+          "columns": [
+            "workspaceId"
+          ],
+          "isUnique": false
+        },
+        "memberships_role_idx": {
+          "name": "memberships_role_idx",
+          "columns": [
+            "roleId"
+          ],
+          "isUnique": false
+        },
+        "memberships_status_idx": {
+          "name": "memberships_status_idx",
+          "columns": [
+            "status"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "memberships_userId_users_id_fk": {
+          "name": "memberships_userId_users_id_fk",
+          "tableFrom": "memberships",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "memberships_organizationId_organizations_id_fk": {
+          "name": "memberships_organizationId_organizations_id_fk",
+          "tableFrom": "memberships",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "organizationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "memberships_workspaceId_workspaces_id_fk": {
+          "name": "memberships_workspaceId_workspaces_id_fk",
+          "tableFrom": "memberships",
+          "tableTo": "workspaces",
+          "columnsFrom": [
+            "workspaceId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "memberships_roleId_roles_id_fk": {
+          "name": "memberships_roleId_roles_id_fk",
+          "tableFrom": "memberships",
+          "tableTo": "roles",
+          "columnsFrom": [
+            "roleId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "memberships_id": {
+          "name": "memberships_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "organizations": {
+      "name": "organizations",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "enum('ACTIVE','SUSPENDED','ARCHIVED')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'ACTIVE'"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
+        },
+        "deletedAt": {
+          "name": "deletedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "organizations_slug_unique": {
+          "name": "organizations_slug_unique",
+          "columns": [
+            "slug"
+          ],
+          "isUnique": true
+        },
+        "organizations_status_idx": {
+          "name": "organizations_status_idx",
+          "columns": [
+            "status"
+          ],
+          "isUnique": false
+        },
+        "organizations_deleted_at_idx": {
+          "name": "organizations_deleted_at_idx",
+          "columns": [
+            "deletedAt"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "organizations_id": {
+          "name": "organizations_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "permissions": {
+      "name": "permissions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "domain": {
+          "name": "domain",
+          "type": "enum('CASES','EVIDENCE','RESEARCH','POLICIES','APPROVALS','ACTIONS','INTEGRATIONS','AUDIT','ADMINISTRATION')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "action": {
+          "name": "action",
+          "type": "enum('READ','CREATE','UPDATE','DELETE','APPROVE','EXECUTE','EXPORT','MANAGE')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "permissionKey": {
+          "name": "permissionKey",
+          "type": "varchar(80)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "permissions_key_unique": {
+          "name": "permissions_key_unique",
+          "columns": [
+            "permissionKey"
+          ],
+          "isUnique": true
+        },
+        "permissions_domain_action_unique": {
+          "name": "permissions_domain_action_unique",
+          "columns": [
+            "domain",
+            "action"
+          ],
+          "isUnique": true
+        },
+        "permissions_domain_idx": {
+          "name": "permissions_domain_idx",
+          "columns": [
+            "domain"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "permissions_id": {
+          "name": "permissions_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "rolePermissions": {
+      "name": "rolePermissions",
+      "columns": {
+        "roleId": {
+          "name": "roleId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "permissionId": {
+          "name": "permissionId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "role_permissions_permission_idx": {
+          "name": "role_permissions_permission_idx",
+          "columns": [
+            "permissionId"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "rolePermissions_roleId_roles_id_fk": {
+          "name": "rolePermissions_roleId_roles_id_fk",
+          "tableFrom": "rolePermissions",
+          "tableTo": "roles",
+          "columnsFrom": [
+            "roleId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "rolePermissions_permissionId_permissions_id_fk": {
+          "name": "rolePermissions_permissionId_permissions_id_fk",
+          "tableFrom": "rolePermissions",
+          "tableTo": "permissions",
+          "columnsFrom": [
+            "permissionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "rolePermissions_roleId_permissionId_pk": {
+          "name": "rolePermissions_roleId_permissionId_pk",
+          "columns": [
+            "roleId",
+            "permissionId"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "roles": {
+      "name": "roles",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "code": {
+          "name": "code",
+          "type": "enum('OWNER','ADMIN','MANAGER','REVIEWER','MEMBER','VIEWER')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "isSystem": {
+          "name": "isSystem",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
+        }
+      },
+      "indexes": {
+        "roles_code_unique": {
+          "name": "roles_code_unique",
+          "columns": [
+            "code"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "roles_id": {
+          "name": "roles_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "users": {
+      "name": "users",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "openId": {
+          "name": "openId",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(320)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "avatar": {
+          "name": "avatar",
+          "type": "varchar(1024)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "enum('ACTIVE','INVITED','SUSPENDED','DELETED')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'ACTIVE'"
+        },
+        "role": {
+          "name": "role",
+          "type": "enum('user','admin')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'user'"
+        },
+        "loginMethod": {
+          "name": "loginMethod",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
+        },
+        "lastSignedIn": {
+          "name": "lastSignedIn",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "deletedAt": {
+          "name": "deletedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "users_email_idx": {
+          "name": "users_email_idx",
+          "columns": [
+            "email"
+          ],
+          "isUnique": false
+        },
+        "users_status_idx": {
+          "name": "users_status_idx",
+          "columns": [
+            "status"
+          ],
+          "isUnique": false
+        },
+        "users_deleted_at_idx": {
+          "name": "users_deleted_at_idx",
+          "columns": [
+            "deletedAt"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "users_id": {
+          "name": "users_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "users_openId_unique": {
+          "name": "users_openId_unique",
+          "columns": [
+            "openId"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "workspaces": {
+      "name": "workspaces",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "organizationId": {
+          "name": "organizationId",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar(120)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "enum('ACTIVE','SUSPENDED','ARCHIVED')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'ACTIVE'"
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
+        },
+        "deletedAt": {
+          "name": "deletedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "workspaces_organization_slug_unique": {
+          "name": "workspaces_organization_slug_unique",
+          "columns": [
+            "organizationId",
+            "slug"
+          ],
+          "isUnique": true
+        },
+        "workspaces_organization_idx": {
+          "name": "workspaces_organization_idx",
+          "columns": [
+            "organizationId"
+          ],
+          "isUnique": false
+        },
+        "workspaces_status_idx": {
+          "name": "workspaces_status_idx",
+          "columns": [
+            "status"
+          ],
+          "isUnique": false
+        },
+        "workspaces_deleted_at_idx": {
+          "name": "workspaces_deleted_at_idx",
+          "columns": [
+            "deletedAt"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "workspaces_organizationId_organizations_id_fk": {
+          "name": "workspaces_organizationId_organizations_id_fk",
+          "tableFrom": "workspaces",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "organizationId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {
+        "workspaces_id": {
+          "name": "workspaces_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    }
+  },
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}

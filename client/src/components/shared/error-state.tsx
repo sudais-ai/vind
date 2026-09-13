@@ -1,0 +1,4 @@
+import { AlertTriangle, RefreshCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export function ErrorState({ message = "We couldn't load this record.", detail = "The mock service did not return a usable result. Nothing was marked as saved.", onRetry }: { message?: string; detail?: string; onRetry?: () => void }) { return <div className="rounded-lg border border-[#ead1cb] bg-[#fdf5f2] p-5" role="alert"><div className="flex items-start gap-3"><AlertTriangle className="mt-0.5 size-5 shrink-0 text-[#a84e43]" /><div className="min-w-0"><p className="text-sm font-semibold text-[#8f3d35]">{message}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{detail}</p>{onRetry && <Button variant="outline" className="mt-4 gap-2 border-[#d4aaa2] text-[#8f3d35]" onClick={onRetry}><RefreshCcw className="size-3.5" />Retry</Button>}</div></div></div>; }

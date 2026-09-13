@@ -1,0 +1,1 @@
+export function Calendar({className}:{className?:string}){return <div className={'rounded-md border border-border p-4 text-sm '+(className??'')}>Calendar preview</div>}

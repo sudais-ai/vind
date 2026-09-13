@@ -1,0 +1,76 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1789160287964,
+      "tag": "0000_clean_mephistopheles",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1789160456390,
+      "tag": "0001_solid_roulette",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1789160774840,
+      "tag": "0002_old_sebastian_shaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1789161335581,
+      "tag": "0003_romantic_kitty_pryde",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1789161530139,
+      "tag": "0004_complex_gabe_jones",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1789161726267,
+      "tag": "0005_brainy_gamora",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1789162020636,
+      "tag": "0006_gray_mimic",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1789162103166,
+      "tag": "0007_complete_warstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1789202264115,
+      "tag": "0008_fine_ares",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1789226500622,
+      "tag": "0009_greedy_silver_samurai",
+      "breakpoints": true
+    }
+  ]
+}

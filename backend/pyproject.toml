@@ -1,0 +1,25 @@
+[project]
+name = "vindicai-backend"
+version = "0.1.0"
+description = "VindicAI backend foundation against the existing MySQL/TiDB authority"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "pydantic>=2.7",
+  "pydantic-settings>=2.4",
+  "sqlalchemy>=2.0",
+  "aiomysql>=0.2",
+  "redis>=5.0",
+  "structlog>=24.4",
+  "uvicorn[standard]>=0.30",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,1 @@
+export function MarketingNetwork(){return <div aria-hidden="true" className="surface-grid absolute inset-0 opacity-50"/>}

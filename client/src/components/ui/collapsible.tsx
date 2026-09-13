@@ -1,0 +1,1 @@
+export const Collapsible=({children}:{children?:React.ReactNode})=><div>{children}</div>; export const CollapsibleTrigger=({children}:{children?:React.ReactNode})=><button>{children}</button>; export const CollapsibleContent=({children}:{children?:React.ReactNode})=><div>{children}</div>;

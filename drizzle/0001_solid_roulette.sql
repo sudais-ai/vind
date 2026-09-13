@@ -1,0 +1,2 @@
+ALTER TABLE `workspaces` ADD CONSTRAINT `workspaces_id_organization_unique` UNIQUE(`id`,`organizationId`);--> statement-breakpoint
+ALTER TABLE `memberships` ADD CONSTRAINT `memberships_workspace_tenant_fk` FOREIGN KEY (`workspaceId`,`organizationId`) REFERENCES `workspaces`(`id`,`organizationId`) ON DELETE no action ON UPDATE no action;

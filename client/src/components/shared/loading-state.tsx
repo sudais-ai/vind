@@ -1,0 +1,2 @@
+import { AIProcessingIndicator } from "./product-states";
+export function LoadingState({label='Loading', detail='Preparing the workspace record'}:{label?:string; detail?:string}){return <div className="mx-auto flex max-w-sm flex-col items-center py-16 text-center"><AIProcessingIndicator state="Analyzing" /><p className="mt-4 text-sm font-semibold">{label}</p><p className="mt-1 text-xs text-muted-foreground">{detail}</p></div>}

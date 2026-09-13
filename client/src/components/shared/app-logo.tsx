@@ -1,0 +1,1 @@
+export function AppLogo(){return <span className="flex items-center gap-2"><span className="flex size-8 items-center justify-center rounded-md bg-primary font-display text-lg text-primary-foreground">V</span><span className="font-display text-xl">VindicAI</span></span>}
